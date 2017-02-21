@@ -42,16 +42,15 @@ namespace KataCopierTest
         [Test]
         public void CopysFromSourceToDestinationUsingMockingFramework()
         {
-            var expectedChar = '0';
-            var source = new Mock<ISource>();
-            source.Setup(x => x.GetChar()).Returns(expectedChar);
+            var source = Substitute.For<ISource>();
+            source.GetChar().Returns('0', '\n');
 
-            var destination = new Mock<IDestination>();
+            var destination = Substitute.For<IDestination>();
             
-            var copier = new Copier(source.Object, destination.Object);
+            var copier = new Copier(source, destination);
             copier.Copy();
 
-            destination.Verify(x => x.SetChar(expectedChar));
+            destination.Received().SetChar('0');
         }
 
         [Test]
@@ -71,7 +70,6 @@ namespace KataCopierTest
 
         [Test] public void CopysMultipleCharsFromSourceToDestinationWasNotCalledWithNewLineUsingMockingFramework()
         {
-            var expectedChar = new List<char>();
             var source = Substitute.For<ISource>();
             source.GetChar().Returns('a', 'b', 'c', '\n');
 

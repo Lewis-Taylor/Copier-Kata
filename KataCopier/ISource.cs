@@ -8,6 +8,6 @@ namespace KataCopier
 {
     public interface ISource
     {
-        char GetChar();
+        char[] GetChar();
     }
 }

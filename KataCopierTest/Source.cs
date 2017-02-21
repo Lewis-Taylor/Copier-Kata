@@ -4,7 +4,7 @@ namespace KataCopierTest
 {
     public class Source : ISource
     {
-        private char _sourceChar;
+        private readonly char _sourceChar;
 
         public Source(char c)
         {
@@ -15,6 +15,5 @@ namespace KataCopierTest
         {
             return _sourceChar;
         }
-
     }
 }
